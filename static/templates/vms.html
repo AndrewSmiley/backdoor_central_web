@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<ul>
+    {% for vm in virtual_machines %}
+        <li>{{ vm.display_name }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>
