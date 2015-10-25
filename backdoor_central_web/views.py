@@ -14,6 +14,7 @@ import datetime
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
 from django.contrib.auth.forms import PasswordResetForm
+from functions import *
 
 
 def index(request):
@@ -38,9 +39,18 @@ def logout(request):
     pass
 def virtual_machine_selection(request):
     pass
-
+def start_session_selection(request):
+    return render(request, "start_session.html", {"semesters":get_all_semesters()})
 def ajax_handler(request, action):
     if action == u'get_virtual_machines_in_semester':
+        return HttpResponse(''.join())
+    elif action == u'get_vms_in_course':
+        return HttpResponse(''.join(list("<option value=\"%s\">%s</option>" % (x.id, x.display_name) for x in get_vms_in_course(request.POST['course_name']))))
+    elif action == u'get_courses_in_semester':
+        return HttpResponse(''.join(list("<option value=\"%s\">%s</option>" % (x.course_name, x.course_name) for x in get_courses_in_semster(request.POST['semester_name']))))
+def start_session(request):
+    return HttpResponse("Fuck ")
+
 # def login_authenticate(request):
 #     if request.user.is_authenticated():
 #         return HttpResponseRedirect(reverse("index"))
