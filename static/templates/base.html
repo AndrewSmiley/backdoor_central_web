@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <title>Backdoor Central Web</title>
+</head>
+<body>
+<a href="{% url "index" %}">Home</a>
+<a href="/admin">Administration</a>
+<a href="/login">Login</a>
+<br>
+{% if user.is_authenticated %}
+
+    <p>Welcome {{ user.username }}<br><a class="lrg-login btn homebtn red right"
+                                                                    href="/logout/">Logout</a></p>
+
+{% else %}
+    <a class="lrg-login btn homebtn red right" href="/login/">Fuck</a>
+{% endif %}
+
+{#<a href="{% url "batch_selection" %}">Run a batch</a>#}
+{#<a href="{% url "file_upload" %}">Upload a File</a>#}
+{#<a href="{% url "download_list" %}">Download Results</a>#}
+{#<a href="{% url "view_data_selection" %}">View Data</a>#}
+{#<a href="{% url "search" %}">Search</a>#}
+<br><br>
+
+{% block content %}
+{% endblock %}
+</body>
+</html>
