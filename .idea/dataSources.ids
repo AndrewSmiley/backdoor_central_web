@@ -48,12 +48,15 @@
       <column name="permission_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <primary-key columns="id"/>
     </table>
-    <table name="BACKDOOR_CENTRAL_WEB_VIRTUALMACHINE" schema="" catalog="" type="TABLE">
+    <table name="BACKDOOR_CENTRAL_WEB_COURSE" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="filename" sqlType="VARCHAR(70)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="display_name" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="username" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="password" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="course_name" sqlType="VARCHAR(70)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="semester_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <primary-key columns="id"/>
+    </table>
+    <table name="BACKDOOR_CENTRAL_WEB_SEMESTER" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="semester_name" sqlType="VARCHAR(70)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <primary-key columns="id"/>
     </table>
     <table name="DJANGO_ADMIN_LOG" schema="" catalog="" type="TABLE">

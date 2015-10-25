@@ -69,12 +69,17 @@ DATABASES = {
 }
 
 
-STATIC_ROOT=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'static')
+STATIC_ROOT=''
 
 STATIC_URL = '/static/'
 
 # List of finder classes that know how to find static files in
 # various locations.
+
+STATICFILES_DIRS = (
+     os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'static'),
+)
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -88,7 +93,7 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 TEMPLATE_DIRS = (
-    STATIC_ROOT + '/templates/',
+    os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'static') + '/templates/',
 )
 MEDIA_ROOT = BASE_DIR + '/media/'
 ROOT_URLCONF = 'backdoor_central_web.urls'

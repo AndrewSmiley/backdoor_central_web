@@ -34,6 +34,13 @@ def authenticate(request):
         else:
             return render(request, 'login.html', {"login_form": AuthenticationForm(), "errors": "User %s does not exist"%(request.POST.get('username', ''))})
 
+def logout(request):
+    pass
+def virtual_machine_selection(request):
+    pass
+
+def ajax_handler(request, action):
+    if action == u'get_virtual_machines_in_semester':
 # def login_authenticate(request):
 #     if request.user.is_authenticated():
 #         return HttpResponseRedirect(reverse("index"))
