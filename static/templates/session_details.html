@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <h3>Session Details</h3>
+{% for key, value in data.items %}
+    <p><b>{{ key }}:</b> {{ value }}</p>
+    {% endfor %}
+    <br><br>
+    <p>Using this information, using your preferred remote connection application (such as SSH), you may now connect to your remote machine. The machine will no longer be available after the session end time.</p>
+{% endblock %}

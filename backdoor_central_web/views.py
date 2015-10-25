@@ -48,8 +48,14 @@ def ajax_handler(request, action):
         return HttpResponse(''.join(list("<option value=\"%s\">%s</option>" % (x.id, x.display_name) for x in get_vms_in_course(request.POST['course_name']))))
     elif action == u'get_courses_in_semester':
         return HttpResponse(''.join(list("<option value=\"%s\">%s</option>" % (x.course_name, x.course_name) for x in get_courses_in_semster(request.POST['semester_name']))))
+
+"""
+So here's the big one
+In this function, we want to call the esxi web service, create the vm and
+get the return data to display to the user
+"""
 def start_session(request):
-    return HttpResponse("Fuck ")
+    return render(request, "session_details.html", {"data":create_new_clone(request.POST['virtual_machine'])})
 
 # def login_authenticate(request):
 #     if request.user.is_authenticated():
