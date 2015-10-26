@@ -28,3 +28,6 @@ def create_new_clone(alternate_id):
 def send_clone_request(alternate_id):
     r = requests.get(ESXI_CLONE_URL+"%s/"%(alternate_id))
     return r.text
+def send_vm_file(folder,vmfile, csrftoken):
+    r = requests.post(ESXI_UPLOAD_VM_URL,data={'folder':folder,'csrfmiddlewaretoken':csrftoken}, files={vmfile.name: vmfile})
+    return load_json(r.text)

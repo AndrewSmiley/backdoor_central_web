@@ -15,6 +15,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
 from django.contrib.auth.forms import PasswordResetForm
 from functions import *
+from forms import UploadForm
 
 
 def index(request):
@@ -57,6 +58,14 @@ get the return data to display to the user
 def start_session(request):
     return render(request, "session_details.html", {"data":create_new_clone(request.POST['virtual_machine'])})
 
+
+def upload_vm_form(request):
+    return render(request, "upload_vm.html", {"courses": get_all_courses()})
+
+def upload_vm(request):
+    #first part is to send the actual VM
+    send_vm_file(str(request.FILES['vmfile'].name).split(".")[0], request.FILES['vmfile'],request.POST['csrfmiddlewaretoken'])
+    return HttpResponse("upload")
 # def login_authenticate(request):
 #     if request.user.is_authenticated():
 #         return HttpResponseRedirect(reverse("index"))
