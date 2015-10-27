@@ -16,7 +16,7 @@ from django.contrib import auth
 from django.contrib.auth.forms import PasswordResetForm
 from functions import *
 from forms import UploadForm
-
+from virtual_machine_functions import *
 
 def index(request):
     return render(request, 'index.html')
@@ -63,16 +63,24 @@ def upload_vm_form(request):
     return render(request, "upload_vm.html", {"courses": get_all_courses()})
 
 def upload_vm(request):
-    #first part is to send the actual VM
-    send_vm_file(str(request.FILES['vmfile'].name).split(".")[0], request.FILES['vmfile'],request.POST['csrfmiddlewaretoken'])
+
+    """
+    Fact, we're going to need a way to rollback these changes if ANYTHING goes wrong
+    if something breaks,we don't want to end up with inconsistent data
+    """
+    #first part is to save the actual vm
+    first_result = save_vm_file(str(request.FILES['vmfile'].name).split(".")[0],
+                                request.FILES['vmfile'])
+    # def create_new_local_vm(filename, display_name, username, password, course):
+    second_result = create_new_local_vm(request.FILES['vmfile'].name,
+                                        request.POST['displayname'],
+                                        request.POST['username'],
+                                        request.POST['password'],
+                                        Course.objects.get(id=int(request.POST['course'])))
+    #the second is going to be to save the VM locally
+    #the third is going to be to update the DB on the ESXI server
+    third_result = create_new_remote_vm(request.FILES['vmfile'].name,
+                                        str(request.FILES['vmfile'].name).split(".")[0],
+                                        request.POST['displayname'],
+                                        second_result['alternate_id'])
     return HttpResponse("upload")
-# def login_authenticate(request):
-#     if request.user.is_authenticated():
-#         return HttpResponseRedirect(reverse("index"))
-#     else:
-#         user = auth.authenticate(username=request.POST.get('username', ''), password=request.POST.get('password', ''))
-#         if user is not None:
-#             auth.login(request, user)
-#             return HttpResponseRedirect(reverse("index"))
-#         else:
-#             return render(request, 'login.html', {"login_form": AuthenticationForm(), "errors": "User %s does not exist"%(request.POST.get('username', ''))})
