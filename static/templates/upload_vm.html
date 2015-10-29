@@ -1,7 +1,7 @@
 {% extends  "base.html" %}
 {% block content %}
     {#    {{ upload_form }}#}
-    <form method="post" action="{% url "upload_vm" %}" enctype="multipart/form-data" %}">{% csrf_token %}
+    <form method="post" action="{% url "upload_vm" %}" enctype="multipart/form-data">{% csrf_token %}
         <h4>Display Name</h4>
         <input type="text" name="displayname">
         <br>
@@ -9,7 +9,7 @@
         <input type="text" name="username">
         <br>
         <h4>Password</h4>
-        <input type="text" name="username">
+        <input type="text" name="password">
         <br>
         <h4>Course</h4>
         <select name="course">

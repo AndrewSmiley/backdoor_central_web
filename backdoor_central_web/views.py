@@ -16,7 +16,7 @@ from django.contrib import auth
 from django.contrib.auth.forms import PasswordResetForm
 from functions import *
 from forms import UploadForm
-
+from virtual_machine_functions import *
 
 def index(request):
     return render(request, 'index.html')
@@ -66,9 +66,30 @@ def upload_vm_form(request):
     return render(request, "upload_vm.html", {"courses": get_all_courses()})
 
 def upload_vm(request):
-    #first part is to send the actual VM
-    send_vm_file(str(request.FILES['vmfile'].name).split(".")[0], request.FILES['vmfile'],request.POST['csrfmiddlewaretoken'])
+
+    """
+    Fact, we're going to need a way to rollback these changes if ANYTHING goes wrong
+    if something breaks,we don't want to end up with inconsistent data
+    """
+    #first part is to save the actual vm
+    first_result = save_vm_file(str(request.FILES['vmfile'].name).split(".")[0],
+                                request.FILES['vmfile'])
+    # def create_new_local_vm(filename, display_name, username, password, course):
+    second_result = create_new_local_vm(request.FILES['vmfile'].name,
+                                        request.POST['displayname'],
+                                        request.POST['username'],
+                                        request.POST['password'],
+                                        Course.objects.get(id=int(request.POST['course'])))
+    #the second is going to be to save the VM locally
+    #the third is going to be to update the DB on the ESXI server
+    third_result = create_new_remote_vm(request.FILES['vmfile'].name,
+                                        str(request.FILES['vmfile'].name).split(".")[0],
+                                        request.POST['displayname'],
+                                        second_result['alternate_id'])
     return HttpResponse("upload")
+<<<<<<< HEAD
 
 def maintenance(request):
     return render(request, "maintenance.html", {"shared_drive_active":is_shared_drive_mounted()})
+=======
+>>>>>>> 7253068a82811fc7731eedfb2257923dc2f70264
