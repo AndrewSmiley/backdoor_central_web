@@ -34,7 +34,15 @@ def send_vm_file(folder,vmfile, csrftoken):
 
 def is_shared_drive_mounted():
     import os
-    if os.listdir(VIRT) == []:
-        print "yes"
+    if os.listdir(VIRTUAL_MACHINE_REPO) == []:
+        return False
     else:
-        print "no"
+        return True
+
+def is_esxi_alive():
+    try:
+        r = requests.get(ESXI_CHECKALIVE_URL)
+        return "Server Is Alive!"
+    except:
+        return "Server Is Not Reachable!"
+    # return "Server Is Alive!" if len(r.text) > 1 else "Server Is Not Reachable!"

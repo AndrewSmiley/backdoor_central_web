@@ -12,6 +12,7 @@
 {% ifusergroup Administrators %}<a href="/admin">Administration</a>{% endifusergroup %}
 {% ifusergroup Administrators  Students  Instructors %}<a href="{% url "start_session_selection" %}">Start A Session</a>{% endifusergroup %}
 {% ifusergroup Instructors %}<a href="{% url "upload_vm_form" %}">Upload Virtual Machine</a>{% endifusergroup %}
+{% ifusergroup Administrators %}<a href="{% url "maintenance" %}">Maintenance</a>{% endifusergroup %}
 
 {% if not user.is_authenticated %} <a href="{% url "login" %}">Login</a> {% else %} <a href="{% url "logout" %}">Logout</a>  {% endif %}
 <br>

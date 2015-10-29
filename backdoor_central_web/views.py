@@ -50,6 +50,8 @@ def ajax_handler(request, action):
         return HttpResponse(''.join(list("<option value=\"%s\">%s</option>" % (x.id, x.display_name) for x in get_vms_in_course(request.POST['course_name']))))
     elif action == u'get_courses_in_semester':
         return HttpResponse(''.join(list("<option value=\"%s\">%s</option>" % (x.course_name, x.course_name) for x in get_courses_in_semster(request.POST['semester_name']))))
+    elif action == u'esxi_check_alive':
+        return HttpResponse(is_esxi_alive())
 
 """
 So here's the big one
@@ -69,4 +71,4 @@ def upload_vm(request):
     return HttpResponse("upload")
 
 def maintenance(request):
-    return render(request, "maintenance.html")
+    return render(request, "maintenance.html", {"shared_drive_active":is_shared_drive_mounted()})

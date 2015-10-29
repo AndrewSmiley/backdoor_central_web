@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
+    <script src="/static/js/maintenance.js" type="text/javascript"></script>
+    <script type="text/javascript">
+     $(document).on("click", "#checkESXiStatusBtn", function(){
+{#        console.log("We run it");#}
+//       $('#loading').show();
+  //     $('#runFrm').hide();
+       esxiCheckAlive();
+    });
+    </script>
     <ul>
     <li>Shared Drive {% if shared_drive_active %}On{% else%}Off{% endif %}</li>
     </ul>
+
+    <button type="button" id="checkESXiStatusBtn">Check ESXi Server Status</button>
 {% endblock %}
