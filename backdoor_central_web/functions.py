@@ -31,3 +31,10 @@ def send_clone_request(alternate_id):
 def send_vm_file(folder,vmfile, csrftoken):
     r = requests.post(ESXI_UPLOAD_VM_URL,data={'folder':folder,'csrfmiddlewaretoken':csrftoken}, files={vmfile.name: vmfile})
     return load_json(r.text)
+
+def is_shared_drive_mounted():
+    import os
+    if os.listdir(VIRT) == []:
+        print "yes"
+    else:
+        print "no"

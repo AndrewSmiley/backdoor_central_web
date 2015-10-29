@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^start_session/$', 'backdoor_central_web.views.start_session', name="start_session"),
     url(r'^upload_vm_form/$', 'backdoor_central_web.views.upload_vm_form', name="upload_vm_form"),
     url(r'^upload_vm/$', 'backdoor_central_web.views.upload_vm', name="upload_vm"),
+    url(r'^maintenance/$', 'backdoor_central_web.views.maintenance', name="maintenance"),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 )

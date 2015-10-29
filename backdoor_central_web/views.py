@@ -37,7 +37,8 @@ def authenticate(request):
             return render(request, 'login.html', {"login_form": AuthenticationForm(), "errors": "User %s does not exist"%(request.POST.get('username', ''))})
 
 def logout(request):
-    pass
+    auth.logout(request)
+    return HttpResponseRedirect(reverse("index"))
 def virtual_machine_selection(request):
     pass
 def start_session_selection(request):
@@ -66,13 +67,6 @@ def upload_vm(request):
     #first part is to send the actual VM
     send_vm_file(str(request.FILES['vmfile'].name).split(".")[0], request.FILES['vmfile'],request.POST['csrfmiddlewaretoken'])
     return HttpResponse("upload")
-# def login_authenticate(request):
-#     if request.user.is_authenticated():
-#         return HttpResponseRedirect(reverse("index"))
-#     else:
-#         user = auth.authenticate(username=request.POST.get('username', ''), password=request.POST.get('password', ''))
-#         if user is not None:
-#             auth.login(request, user)
-#             return HttpResponseRedirect(reverse("index"))
-#         else:
-#             return render(request, 'login.html', {"login_form": AuthenticationForm(), "errors": "User %s does not exist"%(request.POST.get('username', ''))})
+
+def maintenance(request):
+    return render(request, "maintenance.html")
