@@ -87,9 +87,7 @@ def upload_vm(request):
                                         request.POST['displayname'],
                                         second_result['alternate_id'])
     return HttpResponse("upload")
-<<<<<<< HEAD
 
 def maintenance(request):
     return render(request, "maintenance.html", {"shared_drive_active":is_shared_drive_mounted()})
-=======
->>>>>>> 7253068a82811fc7731eedfb2257923dc2f70264
+

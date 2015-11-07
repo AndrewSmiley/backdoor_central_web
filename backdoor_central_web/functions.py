@@ -29,7 +29,6 @@ def create_new_clone(alternate_id):
 def send_clone_request(alternate_id):
     r = requests.get(ESXI_CLONE_URL+"%s/"%(alternate_id))
     return r.text
-<<<<<<< HEAD
 def send_vm_file(folder,vmfile, csrftoken):
     r = requests.post(ESXI_UPLOAD_VM_URL,data={'folder':folder,'csrfmiddlewaretoken':csrftoken}, files={vmfile.name: vmfile})
     return load_json(r.text)
@@ -48,9 +47,9 @@ def is_esxi_alive():
     except:
         return "Server Is Not Reachable!"
     # return "Server Is Alive!" if len(r.text) > 1 else "Server Is Not Reachable!"
-=======
+
 def save_vm_file(folder,vmfile):
     return write_vm_upload(folder, vmfile)
     # r = requests.post(ESXI_UPLOAD_VM_URL,data={'folder':folder}, files={vmfile.name: vmfile})
     # return load_json(r.text)
->>>>>>> 7253068a82811fc7731eedfb2257923dc2f70264
+
